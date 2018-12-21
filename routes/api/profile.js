@@ -78,7 +78,6 @@ router.get('/handle/:handle', (req, res) => {
 // @route   GET api/profile/user/:user_id
 // @desc    Get profile by user ID
 // @access  Public
-
 router.get('/user/:user_id', (req, res) => {
 	Profile.findOne({ user: req.params.user_id })
 	.populate('user', ['name', 'avatar'])
