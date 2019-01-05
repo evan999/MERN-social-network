@@ -180,7 +180,7 @@ class CreateProfile extends Component {
 				<div className="container">
 					<div className="row">
 						<div className="col-md-8 m-auto">
-							<h1 className="display-4 text-center">Create Your Profile</h1>
+							<h1 className="display-4 text-center">Edit Profile</h1>
 							<p className="lead text-editor">
 								Let's get some information to make your profile stand out
 							</p>
