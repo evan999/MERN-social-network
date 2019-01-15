@@ -15,7 +15,7 @@ class Profiles extends Component{
 		let profileItems;
 
 		if (profiles === null || loading) {
-			profileItems= <Spinner />;
+			profileItems = <Spinner />;
 		} else {
 			if(profiles.length > 0) {
 				profileItems = profiles.map(profile => (
@@ -47,7 +47,7 @@ class Profiles extends Component{
 
 Profiles.propTypes = {
 	getProfiles: PropTypes.func.isRequired,
-	profiles: PropTypes.object.isRequired
+	profile: PropTypes.object.isRequired
 }
 
 const mapStateToProps = state => ({
