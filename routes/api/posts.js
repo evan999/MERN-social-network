@@ -24,7 +24,7 @@ router.get('/', (req, res) => {
 	Post.find()
 		.sort({date: -1})
 		.then(posts => res.json(posts))
-		.catch(err => res.status(404).json({ nopostfound: 'No posts found' }));
+		.catch(err => res.status(404).json({ nopostsfound: 'No posts found' }));
 });
 
 // @route  GET api/posts/:id
@@ -32,7 +32,14 @@ router.get('/', (req, res) => {
 // @access Public
 router.get('/:id', (req, res) => {
 	Post.findById(req.params.id)
-		.then(post => res.json(post))
+		.then(post => {
+			if (post) {
+				res.json(post);
+			}
+			else {
+				res.status(404).json({ nopostfound: 'No post found with that ID' })
+			}
+		})
 		.catch(err => 
 			res.status(404).json({ nopostfound: 'No post found with that ID' })
 		);
@@ -61,6 +68,7 @@ router.post('/', passport.authenticate('jwt', { session: false }),
 		avatar: req.body.avatar,
 		user: req.user.id
 	});
+
 	newPost.save().then(post => res.json(post));
 });
 
@@ -69,8 +77,7 @@ router.post('/', passport.authenticate('jwt', { session: false }),
 // @access Private
 
 router.delete('/:id', passport.authenticate('jwt', { session: false }),
-(req, res) => {
-	
+(req, res) => {	
 	Profile.findOne({ user: req.user.id })
 		.then(profile => {
 			Post.findById(req.params.id)
@@ -145,7 +152,8 @@ router.post('/unlike/:id', passport.authenticate('jwt', { session: false }),
 // @desc   Add comment to post
 // @access Private
 
-router.post('/comment/:id', passport.authenticate('jwt', { session: false}),(req, res) => {
+router.post('/comment/:id', passport.authenticate('jwt', { session: false}),
+(req, res) => {
 	const { errors, isValid } = validatePostInput(req.body);
 
 	// Check validation

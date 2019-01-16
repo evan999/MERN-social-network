@@ -42,5 +42,5 @@ export const getPosts = () => dispatch => {
 export const setPostLoading = () => {
 	return {
 		type: POST_LOADING
-	}
-}
+	};
+};
