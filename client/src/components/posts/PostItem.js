@@ -48,7 +48,8 @@ class PostItem extends Component {
 						<p className="lead">
 							{post.text}
 						</p>
-						{showActions ? (<span>
+						{showActions ? (
+						<span>
 							<button onClick={this.onLikeClick.bind(this, post._id)} type="button" className="btn btn-light mr-1">
 								<i className={classnames('fas fa-thumbs-up', {
 									'text-info': this.findUserLike(post.likes)

@@ -27,14 +27,15 @@ class CommentForm extends Component {
 		e.preventDefault();
 
 		const { user } = this.props.auth;
+		const { postId } = this.props;
 
-		const newPost = {
+		const newComment = {
 			text: this.state.text,
 			name: user.name,
 			avatar: user.avatar
 		}
 
-		this.props.addPost(newPost);
+		this.props.addComment(postId, newComment);
 		this.setState({ text: '' });
 	}
 
@@ -55,7 +56,7 @@ class CommentForm extends Component {
 						<form onSubmit={this.onSubmit}>
 							<div className="form-group">
 								<TextAreaFieldGroup
-									placeholder="Create a post"
+									placeholder="Reply to post"
 									name="text"
 									value={this.state.text}
 									onChange={this.onChange}
@@ -73,9 +74,10 @@ class CommentForm extends Component {
 	}
 }
 
-PostForm.propTypes = {
+CommentForm.propTypes = {
 	addPost: PropTypes.func.isRequired,
 	auth: PropTypes.object.isRequired,
+	postId: PropTypes.string.isRequired,
 	errors: PropTypes.object.isRequired
 }
 
@@ -84,5 +86,5 @@ const mapStateToProps = state => ({
 	errors: state.errors
 });
 
-export default connect(mapStateToProps, { addPost })(PostForm);
+export default connect(mapStateToProps, { addComment })(CommentForm);
 
