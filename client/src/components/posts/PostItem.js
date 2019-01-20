@@ -18,8 +18,10 @@ class PostItem extends Component {
 				<div className="row">
 					<div className="col-md-2">
 						<a href="profile.html">
-							<img className="rounded-circle d-none d-md-block" src={post.avatar}
-								alt="" />
+							<img className="rounded-circle d-none d-md-block" 
+								src={post.avatar}
+								alt="" 
+							/>
 						</a>
 						<br />
 						<p className="text-center">{post.name}</p>
@@ -46,14 +48,14 @@ class PostItem extends Component {
 					</div>
 				</div>
 			</div>
-		)
+		);
 	}
 }
 
 PostItem.propTypes = {
 	post: PropTypes.object.isRequired,
 	auth: PropTypes.object.isRequired
-}
+};
 
 const mapStateToProps = state => ({
 	auth: state.auth

@@ -57,7 +57,7 @@ router.post('/', passport.authenticate('jwt', { session: false }),
 	const { errors, isValid } = validatePostInput(req.body);
 
 	// Check validation
-	if(!isValid){
+	if (!isValid){
 		// If any errors, send 400 with errors object
 		return res.status(400).json(errors);
 	}
@@ -76,7 +76,8 @@ router.post('/', passport.authenticate('jwt', { session: false }),
 // @desc   Delete post
 // @access Private
 
-router.delete('/:id', passport.authenticate('jwt', { session: false }),
+router.delete('/:id', 
+passport.authenticate('jwt', { session: false }),
 (req, res) => {	
 	Profile.findOne({ user: req.user.id })
 		.then(profile => {
@@ -100,7 +101,8 @@ router.delete('/:id', passport.authenticate('jwt', { session: false }),
 // @desc   Like post
 // @access Private
 
-router.post('/like/:id', passport.authenticate('jwt', { session: false }),
+router.post('/like/:id', 
+passport.authenticate('jwt', { session: false }),
 (req, res) => {
 	Profile.findOne({ user: req.user.id })
 		.then(profile => {

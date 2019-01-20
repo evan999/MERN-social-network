@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 import TextAreaFieldGroup from '../common/TextAreaFieldGroup';
 import { addPost } from '../../actions/postActions';
 
@@ -19,7 +19,7 @@ class PostForm extends Component {
 
 	componentWillReceiveProps(newProps) {
 		if (newProps.errors) {
-			this.setState({errors: newProps.errors});
+			this.setState({ errors: newProps.errors });
 		}
 	}
 
@@ -35,11 +35,11 @@ class PostForm extends Component {
 		}
 
 		this.props.addPost(newPost);
-		this.setState({text: ''});
+		this.setState({ text: '' });
 	}
 
 	onChange(e) {
-		this.setState({[e.target.name]: e.target.value});
+		this.setState({ [e.target.name]: e.target.value });
 	}
 
 	render() {
@@ -62,12 +62,14 @@ class PostForm extends Component {
 									error={errors.text}
 								/>
 							</div>
-							<button type="submit" className="btn btn-dark">Submit</button>
+							<button type="submit" className="btn btn-dark">
+								Submit
+							</button>
 						</form>
 					</div>
 				</div>
 			</div>
-		)
+		);
 	}
 }
 

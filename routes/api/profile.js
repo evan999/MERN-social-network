@@ -137,7 +137,7 @@ router.post('/', passport.authenticate('jwt', { session: false }), (req, res) =>
 				Profile.findOneAndUpdate(
 					{ user: req.user.id }, 
 					{ $set: profileFields }, 
-					{ new: true}
+					{ new: true }
 				).then(profile => res.json(profile));
 			}
 			else{
@@ -185,7 +185,7 @@ router.post('/experience', passport.authenticate('jwt', { session: false }), (re
 				description: req.body.description
 			}
 
-			// Add to education array
+			// Add to experience array
 			profile.experience.unshift(newExp);
 
 			profile.save().then(profile => res.json(profile));
@@ -255,7 +255,6 @@ router.delete(
 	'/education/:edu_id', 
 	passport.authenticate('jwt', { session: false }), 
 	(req, res) => {
-
 		Profile.findOne({ user: req.user.id }).then(profile => {
 			// Get remove index
 			const removeIndex = profile.education
@@ -279,7 +278,6 @@ router.delete(
 	'/', 
 	passport.authenticate('jwt', { session: false }), 
 	(req, res) => {
-
 		Profile.findOneAndRemove({ user: req.user.id })
 			.then(() => {
 				User.findOneAndRemove({ _id: req.user.id })
