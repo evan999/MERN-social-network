@@ -94,8 +94,9 @@ passport.authenticate('jwt', { session: false }),
 					post.remove().then(() => res.json({ success: true }));
 				})
 				.catch(err => res.status(404).json({ postnotfound: 'No post found' }));
-		})
-})
+		});
+	}
+);
 
 // @route  POST api/posts/like/:id
 // @desc   Like post
@@ -109,7 +110,9 @@ passport.authenticate('jwt', { session: false }),
 			Post.findById(req.params.id)
 				.then(post => {
 					if(post.likes.filter(like => like.user.toString() === req.user.id).length > 0) {
-						return res.status(400).json({ alreadyliked: 'User already liked this post' });
+						return res
+						.status(400)
+						.json({ alreadyliked: 'User already liked this post' });
 					}
 
 					// Add user ID to likes array
@@ -154,12 +157,13 @@ router.post('/unlike/:id', passport.authenticate('jwt', { session: false }),
 // @desc   Add comment to post
 // @access Private
 
-router.post('/comment/:id', passport.authenticate('jwt', { session: false}),
+router.post('/comment/:id', 
+passport.authenticate('jwt', { session: false}),
 (req, res) => {
 	const { errors, isValid } = validatePostInput(req.body);
 
 	// Check validation
-	if(!isValid){
+	if (!isValid){
 		// If any errors, send 400 with errors object
 		return res.status(400).json(errors);
 	}
@@ -186,7 +190,9 @@ router.post('/comment/:id', passport.authenticate('jwt', { session: false}),
 // @desc   Remove comment from post
 // @access Private
 
-router.delete('/comment/:id/:comment_id', passport.authenticate('jwt', { session: false}),(req, res) => {
+router.delete('/comment/:id/:comment_id', 
+passport.authenticate('jwt', { session: false}),
+(req, res) => {
 	Post.findById(req.params.id)
 		.then(post => {
 			// Check to see if comment exists
